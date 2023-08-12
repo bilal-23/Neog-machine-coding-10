@@ -12,11 +12,15 @@ import { useProductContext } from "../context/product-context";
 
 const ProductHeader = () => {
   const { updateActiveFilters, activeFilters } = useProductContext();
+  console.log(activeFilters.department);
 
   return (
     <div className="flex justify-between">
       <h1 className="text-4xl font-bold">Products</h1>
-      <Select onValueChange={(e) => updateActiveFilters("department", e)}>
+      <Select
+        onValueChange={(e) => updateActiveFilters("department", e)}
+        value={activeFilters.department}
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Department" />
         </SelectTrigger>
@@ -24,6 +28,7 @@ const ProductHeader = () => {
           <SelectItem value="disabled" disabled>
             Department
           </SelectItem>
+          <SelectItem value="all">All Department</SelectItem>
           <SelectItem value="kitchen">Kitchen</SelectItem>
           <SelectItem value="clothing">Clothing</SelectItem>
           <SelectItem value="toys">Toys</SelectItem>

@@ -57,7 +57,7 @@ export const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]); // [
   const [activeFilters, setActiveFilters] = useState({
-    department: "",
+    department: "all",
     lowStock: false,
     sortBy: "",
   });
@@ -125,6 +125,9 @@ export const ProductProvider: React.FC<IProps> = ({ children }) => {
           product.department.toLocaleLowerCase() ===
           filters.department.toLocaleLowerCase()
       );
+    }
+    if (filters.department === "all") {
+      tempProducts = [...products];
     }
     // filter by low stock
     if (filters.lowStock) {

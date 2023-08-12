@@ -25,8 +25,7 @@ export const Card: React.FC<ICardProps> = ({ title, link }) => {
   // This function chnages the filter in the store and navigates to the products page
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
-    updateActiveFilters("department", title);
-    // dispatch(setFilter({department: title}))
+    updateActiveFilters("department", title.toLocaleLowerCase());
     navigate(`/${link}`);
   };
 

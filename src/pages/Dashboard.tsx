@@ -17,16 +17,16 @@ const Dashboard = () => {
     if (products) {
       // Get total stocks
       totalStocks = products.reduce((acc, curr) => {
-        return acc + curr.stock;
+        return +acc + +curr.stock;
       }, 0);
 
       totalDelivered = products.reduce((acc, curr) => {
-        return acc + curr.delivered;
+        return +acc + +curr.delivered;
       }, 0);
 
       lowStockItem = products.reduce((acc, curr) => {
         if (curr.stock <= 10) {
-          return acc + 1;
+          return +acc + 1;
         }
         return acc;
       }, 0);

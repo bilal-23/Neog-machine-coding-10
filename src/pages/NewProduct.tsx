@@ -112,6 +112,7 @@ const NewProduct = () => {
             id="price"
             placeholder="0"
             type="number"
+            min={0}
             required
             onChange={handleChangeInput}
           />
@@ -120,6 +121,7 @@ const NewProduct = () => {
           <Label htmlFor="stock">Stock:</Label>
           <Input
             id="stock"
+            min={0}
             type="number"
             placeholder="0"
             onChange={handleChangeInput}
@@ -143,6 +145,7 @@ const NewProduct = () => {
           <Input
             id="delivered"
             type="number"
+            min={0}
             placeholder="0"
             required
             onChange={handleChangeInput}
