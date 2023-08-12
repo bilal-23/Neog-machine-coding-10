@@ -42,11 +42,11 @@ const ProductContext = createContext<ProductContextType>({
     lowStock: false,
     sortBy: "",
   },
-  addProduct: (product: Product) => {},
-  getProduct: (id: string) => undefined,
+  addProduct: (_product: Product) => {},
+  getProduct: (_id: string) => undefined,
   updateActiveFilters: (
-    filterType: "department" | "lowStock" | "sortBy",
-    value: string | boolean
+    _filterType: "department" | "lowStock" | "sortBy",
+    _value: string | boolean
   ) => {},
 });
 
