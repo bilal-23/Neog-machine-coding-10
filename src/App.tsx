@@ -13,7 +13,7 @@ function App() {
         <Navigation />
         <section className="py-10 px-12 w-full">
           <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/departments" element={<Departments />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetail />} />

@@ -7,7 +7,7 @@ const Navigation = () => {
       <ul className={cn("flex flex-col gap-4 text-2xl")}>
         <li className="hover:text-white text-slate-400">
           <NavLink
-            to={"/dashboard"}
+            to={"/"}
             className={({ isActive }) => (!isActive ? "" : "text-white")}
           >
             Dashboard

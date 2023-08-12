@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -9,15 +8,15 @@ import {
 import { Checkbox } from "../components/ui/checkbox";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { useProductContext } from "../context/product-context";
 
 const ProductHeader = () => {
-  const [, setActiveDepartment] = useState("Kitchen");
-  const [, setActiveSort] = useState("Name");
+  const { updateActiveFilters, activeFilters } = useProductContext();
 
   return (
     <div className="flex justify-between">
       <h1 className="text-4xl font-bold">Products</h1>
-      <Select onValueChange={(e) => setActiveDepartment(e)}>
+      <Select onValueChange={(e) => updateActiveFilters("department", e)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Department" />
         </SelectTrigger>
@@ -25,13 +24,19 @@ const ProductHeader = () => {
           <SelectItem value="disabled" disabled>
             Department
           </SelectItem>
-          <SelectItem value="kithcen">Kitchen</SelectItem>
+          <SelectItem value="kitchen">Kitchen</SelectItem>
           <SelectItem value="clothing">Clothing</SelectItem>
           <SelectItem value="toys">Toys</SelectItem>
         </SelectContent>
       </Select>
       <div className="flex items-center gap-2">
-        <Checkbox id="low-stock" />
+        <Checkbox
+          id="low-stock"
+          checked={activeFilters.lowStock}
+          onCheckedChange={(e) => {
+            updateActiveFilters("lowStock", e);
+          }}
+        />
         <label
           htmlFor="low-stock"
           className="text-base cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -41,7 +46,7 @@ const ProductHeader = () => {
       </div>
       <Select
         onValueChange={(e) => {
-          setActiveSort(e);
+          updateActiveFilters("sortBy", e);
         }}
       >
         <SelectTrigger className="w-[180px]">

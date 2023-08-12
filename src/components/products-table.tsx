@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { inventoryData } from "../data";
+import { useProductContext } from "../context/product-context";
 
 const ProductTable = () => {
+  const { filteredProducts } = useProductContext();
+
   const navigate = useNavigate();
   const handleNavigateProductDetail = (id: number) => {
     navigate(`/product/${id}`);
@@ -20,7 +22,7 @@ const ProductTable = () => {
         </tr>
       </thead>
       <tbody className="px-4 ">
-        {inventoryData.map((product) => (
+        {filteredProducts.map((product) => (
           <tr
             onClick={handleNavigateProductDetail.bind(this, product.id)}
             key={product.id}

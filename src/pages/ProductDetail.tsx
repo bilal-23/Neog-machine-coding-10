@@ -1,17 +1,33 @@
-const product = {
-  id: 1,
-  department: "Kitchen",
-  name: "Stainless Steel Cookware Set",
-  description:
-    "A set of high-quality stainless steel cookware including pots and pans.",
-  price: 149.99,
-  stock: 15,
-  sku: "KITCH001",
-  supplier: "KitchenWonders Inc.",
-  delivered: 15,
-  imageUrl: "https://m.media-amazon.com/images/I/616vJsA33kL.jpg",
-};
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useProductContext } from "../context/product-context";
+interface Product {
+  id: number;
+  department: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  sku: string;
+  supplier: string;
+  delivered: number;
+  imageUrl: string;
+}
+
 const ProductDetail = () => {
+  const [product, setProduct] = useState<Product>();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { getProduct } = useProductContext();
+
+  useEffect(() => {
+    if (!id) return navigate("/404");
+    console.log(id);
+    const product = getProduct(id);
+    if (product) setProduct(product);
+  }, [id]);
+
+  if (!product) return null;
   return (
     <div className="p-12 max-w-[500px] m-auto bg-slate-700 rounded-md flex flex-col  gap-2">
       <p className="py-2 px-4 text-2xl font-bold text-center">{product.name}</p>

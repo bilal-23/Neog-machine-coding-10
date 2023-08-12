@@ -10,31 +10,39 @@ import {
 import { SyntheticEvent, useState } from "react";
 import { Textarea } from "../components/ui/textarea";
 import { Button } from "../components/ui/button";
+import { useProductContext } from "../context/product-context";
+import { useNavigate } from "react-router";
 
 interface IInitialState {
-  department: string | null;
-  name: string | null;
-  description: string | null;
-  price: string | null;
-  stock: string | null;
-  sku: string | null;
-  supplier: string | null;
-  delivered: string | null;
+  id: number;
+  department: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  sku: string;
+  supplier: string;
+  delivered: number;
+  imageUrl: string;
 }
 
 const initialState: IInitialState = {
-  department: null,
-  name: null,
-  description: null,
-  price: null,
-  stock: null,
-  sku: null,
-  supplier: null,
-  delivered: null,
+  id: Math.floor(Math.random() * 10000),
+  department: "",
+  name: "",
+  description: "",
+  price: 0,
+  stock: 0,
+  sku: "",
+  supplier: "",
+  delivered: 0,
+  imageUrl: "",
 };
 
 const NewProduct = () => {
+  const { addProduct } = useProductContext();
   const [formData, setFormData] = useState(initialState);
+  const navigate = useNavigate();
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleChangeInput = (
@@ -52,7 +60,8 @@ const NewProduct = () => {
 
   const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(formData);
+    addProduct(formData);
+    navigate("/products");
   };
 
   return (
@@ -118,7 +127,7 @@ const NewProduct = () => {
         </div>
         <div>
           <Label htmlFor="sku">SKU:</Label>
-          <Input id="sku" type="number" required onChange={handleChangeInput} />
+          <Input id="sku" type="text" required onChange={handleChangeInput} />
         </div>
         <div>
           <Label htmlFor="supplier">Supplier:</Label>
@@ -135,6 +144,15 @@ const NewProduct = () => {
             id="delivered"
             type="number"
             placeholder="0"
+            required
+            onChange={handleChangeInput}
+          />
+        </div>
+        <div>
+          <Label htmlFor="imageUrl">Image Url:</Label>
+          <Input
+            id="imageUrl"
+            type="text"
             required
             onChange={handleChangeInput}
           />

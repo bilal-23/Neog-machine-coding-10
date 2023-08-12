@@ -1,5 +1,6 @@
 import { SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useProductContext } from "../context/product-context";
 
 const Departments = () => {
   return (
@@ -19,10 +20,12 @@ interface ICardProps {
 }
 export const Card: React.FC<ICardProps> = ({ title, link }) => {
   const navigate = useNavigate();
+  const { updateActiveFilters } = useProductContext();
 
   // This function chnages the filter in the store and navigates to the products page
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
+    updateActiveFilters("department", title);
     // dispatch(setFilter({department: title}))
     navigate(`/${link}`);
   };
